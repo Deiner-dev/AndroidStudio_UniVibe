@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="44dp"
+    android:paddingEnd="16dp"
+    android:paddingVertical="6dp">
+
+    <!-- Reply User Avatar -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_reply_user_avatar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+    <!-- Reply Bubble Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_reply_bubble"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:cardBackgroundColor="#F4F6F8"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_reply_user_avatar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:id="@+id/tv_reply_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextDark"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="Juan Camilo Martínez" />
+
+            <TextView
+                android:id="@+id/tv_reply_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="12sp"
+                tools:text="Muy buen resultado, felicitaciones a todos 🎉" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_reply_image"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="6dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                tools:src="@android:drawable/ic_menu_gallery"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Reply Actions Row -->
+    <LinearLayout
+        android:id="@+id/ll_reply_actions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/card_reply_bubble"
+        app:layout_constraintTop_toBottomOf="@id/card_reply_bubble">
+
+        <TextView
+            android:id="@+id/tv_reply_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextGrey"
+            android:textSize="11sp"
+            tools:text="Hace 1 hora" />
+
+        <LinearLayout
+            android:id="@+id/ll_reply_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_reply_like_star"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@string/label_publications"
+                android:src="@android:drawable/btn_star_big_off"
+                app:tint="@color/colorTextGrey" />
+
+            <TextView
+                android:id="@+id/tv_reply_likes_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="11sp"
+                tools:text="8" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

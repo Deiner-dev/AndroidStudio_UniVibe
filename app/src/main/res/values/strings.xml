@@ -1,0 +1,167 @@
+<resources>
+    <string name="app_name">UniVibe</string>
+    <string name="btn_save">Guardar Registro</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_last_name">Apellido</string>
+    <string name="hint_age">Edad</string>
+    <string name="hint_phone">Teléfono</string>
+    <string name="msg_save_success">Guardado correctamente</string>
+    <string name="msg_fill_fields">Por favor, llene todos los campos</string>
+    <string name="welcome_back">Bienvenido de nuevo</string>
+    <string name="login_subtitle">Inicia sesión para continuar</string>
+    <string name="hint_email_user">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="remember_me">Recordarme</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="btn_login">Iniciar Sesión</string>
+    <string name="continue_with">O continúa con</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+    <string name="register_here">Regístrate</string>
+    <string name="hint_example_email">daolivero@unicesar.edu.co</string>
+    <string name="hint_password_dots">..........................</string>
+    <string name="desc_email_icon">Icono de correo</string>
+    <string name="desc_password_icon">Icono de contraseña</string>
+    <string name="desc_logo">Logo de UniVibe</string>
+
+    <!-- Dashboard Strings -->
+    <string name="greeting_format">¡Hola, %1$s!</string>
+    <string name="welcome_to_univibe">Bienvenido a UniVibe</string>
+    <string name="label_local">Local</string>
+    <string name="subtitle_local">Mi Universidad</string>
+    <string name="label_colombia">Colombia</string>
+    <string name="subtitle_colombia">Todas las Universidades</string>
+    <string name="share_prompt">¿Qué quieres compartir hoy?</string>
+    <string name="empty_posts_title">Aún no hay publicaciones</string>
+    <string name="empty_posts_subtitle">Sé el primero en compartir algo con tu comunidad.</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_search">Buscar</string>
+    <string name="nav_alerts">Alertas</string>
+    <string name="nav_profile">Perfil</string>
+    <string name="desc_add">Agregar</string>
+    <string name="desc_notifications">Notificaciones</string>
+    <string name="desc_messages">Mensajes</string>
+    <string name="notification_count_placeholder">3</string>
+    <string name="placeholder_user_name">Andrés López</string>
+    <string name="placeholder_user_handle">\@andreslopez</string>
+    <string name="placeholder_career">Ingeniería de Sistemas</string>
+    <string name="placeholder_university">Universidad del Valle</string>
+    <string name="placeholder_about_me">Estudiante de Ingeniería de Sistemas apasionado por la tecnología, la innovación y el aprendizaje continuo.</string>
+    <string name="placeholder_stat_val">0</string>
+    <string name="label_achievement_1">Colaborador activo</string>
+    <string name="label_achievement_2">Seguidos</string>
+    <string name="label_achievement_3">Seguidores</string>
+    <string name="btn_follow">Seguir</string>
+    <string name="btn_following">Siguiendo</string>
+
+    <!-- Registration Strings -->
+    <string name="title_create_account">Crear cuenta</string>
+    <string name="subtitle_register">Regístrate para comenzar</string>
+    <string name="label_full_name">Nombre completo</string>
+    <string name="hint_full_name">Ingresa tu nombre completo</string>
+    <string name="label_institutional_email">Correo institucional</string>
+    <string name="label_password_reg">Contraseña</string>
+    <string name="hint_password_reg">Ingresa tu contraseña</string>
+    <string name="label_university">Universidad</string>
+    <string name="hint_select_university">Selecciona tu universidad</string>
+    <string name="btn_register_me">Regístrame</string>
+    <string name="terms_and_privacy">Al registrarte, aceptas nuestros Términos de uso y nuestra Política de privacidad.</string>
+    <string name="or_register_with">o regístrate con</string>
+    <string name="already_have_account">¿Ya tienes cuenta?</string>
+    <string name="login_here">Inicia sesión</string>
+    <string name="desc_user_icon">Icono de usuario</string>
+    <string name="desc_university_icon">Icono de universidad</string>
+    <string name="label_google">Google</string>
+    <string name="label_microsoft">Microsoft</string>
+    <string name="desc_terms_icon">Icono de términos</string>
+    <string name="desc_google_icon">Icono de Google</string>
+    <string name="desc_microsoft_icon">Icono de Microsoft</string>
+    <string name="desc_dropdown">Desplegable</string>
+
+    <!-- University List -->
+    <string-array name="universities_array">
+        <item>Selecciona tu universidad</item>
+        <item>Universidad Popular del Cesar</item>
+        <item>Universidad de Antioquia</item>
+        <item>Universidad San José</item>
+        <item>Universidad Nacional</item>
+    </string-array>
+    <string name="msg_registered_success">Registrado correctamente</string>
+
+    <!-- Profile Strings -->
+    <string name="title_my_profile">Mi perfil</string>
+    <string name="label_publications">Publicaciones</string>
+    <string name="label_comments">Comentarios</string>
+    <string name="label_followers">Seguidores</string>
+    <string name="label_about_me">Sobre mí</string>
+    <string name="label_achievements">Logros</string>
+    <string name="label_see_all">Ver todos</string>
+    <string name="tab_posts">Publicaciones</string>
+    <string name="tab_saved">Guardadas</string>
+    <string name="tab_activity">Actividad</string>
+    <string name="empty_profile_posts_title">Aún no has publicado nada</string>
+    <string name="empty_profile_posts_subtitle">Comparte tus ideas, proyectos o preguntas con tu comunidad.</string>
+    <string name="btn_create_post">Crear publicación</string>
+    <string name="desc_settings">Configuración</string>
+    <string name="desc_edit_profile">Editar perfil</string>
+    <string name="desc_logout">Cerrar sesión</string>
+    <string name="msg_logout_success">Sesión cerrada correctamente</string>
+
+    <!-- Social Auth Strings -->
+    <string name="msg_auth_google_error">Error de autenticación con Google</string>
+    <string name="msg_auth_microsoft_error">Error de autenticación con Microsoft</string>
+    <string name="msg_auth_canceled">Inicio de sesión cancelado</string>
+    <string name="msg_auth_success">Sesión iniciada correctamente</string>
+
+    <!-- New Post Strings -->
+    <string name="title_new_post">Nueva Publicación</string>
+    <string name="subtitle_new_post">Comparte algo con tu comunidad</string>
+    <string name="hint_what_to_share">¿Qué quieres compartir?</string>
+    <string name="label_image">Imagen</string>
+    <string name="label_video">Video</string>
+    <string name="hint_add_location_optional">Agregar ubicación (Opcional)</string>
+    <string name="btn_publish">Publicar</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="msg_videos_not_supported">Los videos no están disponibles en esta versión</string>
+    <string name="msg_post_empty_error">Ingresa un texto o selecciona una imagen para publicar</string>
+    <string name="msg_post_both_error">Solo puedes publicar texto O una imagen, no ambos</string>
+    <string name="msg_publishing">Publicando...</string>
+    <string name="msg_post_success">Publicación creada exitosamente</string>
+    <string name="msg_post_error">Error al crear la publicación</string>
+    <string name="desc_remove_image">Eliminar imagen</string>
+    <string name="user_academic_info_format">%1$s • %2$s</string>
+    <string name="default_semester">4º semestre</string>
+    <string name="desc_options">Opciones</string>
+    <string name="desc_location_icon">Icono de ubicación</string>
+
+    <!-- Settings Menu Strings -->
+    <string name="menu_configuration">Configuración</string>
+    <string name="menu_privacy">Privacidad</string>
+    <string name="menu_help_support">Ayuda y soporte</string>
+
+    <!-- Comments Strings -->
+    <string name="title_post_detail">Publicación</string>
+    <string name="title_comments_count">Comentarios (%1$d)</string>
+    <string name="hint_write_comment">Escribe un comentario...</string>
+    <string name="action_reply">Responder</string>
+    <string name="action_sort_recent">Más recientes</string>
+    <string name="label_likes">Me gusta</string>
+    <string name="label_saved">Guardados</string>
+    <string name="msg_comment_empty">Escribe un comentario antes de enviar</string>
+    <string name="msg_comment_success">Comentario publicado</string>
+    <string name="msg_comment_error">Error al enviar el comentario</string>
+    <string name="desc_send_comment">Enviar comentario</string>
+    <string name="desc_back">Volver</string>
+    <string name="public_audience">Público</string>
+    <string name="user_academic_university_format">%1$s • %2$s</string>
+    <string name="time_audience_format">%1$s • %2$s</string>
+
+    <!-- Fullscreen Image & Download Strings -->
+    <string name="option_download_image">Descargar imagen</string>
+    <string name="msg_downloading_image">Iniciando descarga de imagen...</string>
+    <string name="msg_download_success">Imagen guardada en la galería</string>
+    <string name="msg_download_error">Error al descargar la imagen</string>
+
+    <!-- Camera & Crop Strings -->
+    <string name="title_confirm_photo">Confirmar foto</string>
+    <string name="btn_accept_photo">Aceptar</string>
+</resources>

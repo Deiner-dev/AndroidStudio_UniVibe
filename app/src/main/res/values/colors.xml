@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="Turquesa">#E8FFF6</color>
+    <color name="TurquesaVivo">#30D5C8</color>
+    <color name="colorBrandMain">#36A477</color>
+    <color name="colorBackgroundMain">#F4F9F7</color>
+    <color name="colorTextDark">#1A3E30</color>
+    <color name="colorTextGrey">#7A8C85</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRedBadge">#FF4D4D</color>
+    <color name="colorDivider">#E0E0E0</color>
+    <color name="colorLightGreen">#E8F5E9</color>
+    <color name="colorLightBlue">#E3F2FD</color>
+    <color name="colorLightYellow">#FFFDE7</color>
+</resources>

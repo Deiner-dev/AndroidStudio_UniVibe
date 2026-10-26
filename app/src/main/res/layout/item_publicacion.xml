@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- User Avatar -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_post_user_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+        <!-- User Info Container -->
+        <LinearLayout
+            android:id="@+id/ll_post_user_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/iv_post_user_avatar"
+            app:layout_constraintEnd_toStartOf="@id/tv_post_time"
+            app:layout_constraintStart_toEndOf="@id/iv_post_user_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_post_user_avatar">
+
+            <TextView
+                android:id="@+id/tv_post_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextDark"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="María Fernanda López" />
+
+            <TextView
+                android:id="@+id/tv_post_academic_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="12sp"
+                tools:text="Ingeniería de Sistemas • 4º semestre" />
+        </LinearLayout>
+
+        <!-- Follow Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_follow_user"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="0dp"
+            android:text="@string/btn_follow"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorBrandMain"
+            app:cornerRadius="17dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_post_user_avatar" />
+
+        <!-- Time Ago / Date -->
+        <TextView
+            android:id="@+id/tv_post_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/colorTextGrey"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_follow_user"
+            tools:text="Hace 5 min" />
+
+        <!-- Post Content Body Container (Text + Image + Location) -->
+        <LinearLayout
+            android:id="@+id/ll_post_content_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/iv_post_user_avatar">
+
+            <!-- Post Text Content -->
+            <TextView
+                android:id="@+id/tv_post_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:text="¡Hola a todos! Compartiendo una nueva publicación en UniVibe."
+                tools:visibility="visible" />
+
+            <!-- Post Image Content -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_post_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                tools:src="@android:drawable/ic_menu_gallery"
+                tools:visibility="visible" />
+
+            <!-- Location Tag -->
+            <LinearLayout
+                android:id="@+id/ll_post_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:contentDescription="@string/desc_location_icon"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    app:tint="@color/colorBrandMain" />
+
+                <TextView
+                    android:id="@+id/tv_post_location_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textColor="@color/colorBrandMain"
+                    android:textSize="12sp"
+                    tools:text="Universidad Popular del Cesar" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Divider Line -->
+        <View
+            android:id="@+id/divider_post"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="#EEEEEE"
+            app:layout_constraintTop_toBottomOf="@id/ll_post_content_body" />
+
+        <!-- Footer Actions Bar -->
+        <LinearLayout
+            android:id="@+id/ll_post_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/divider_post">
+
+            <LinearLayout
+                android:id="@+id/ll_like"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="6dp">
+
+                <ImageView
+                    android:id="@+id/iv_like_star"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:contentDescription="@string/label_publications"
+                    android:src="@android:drawable/btn_star_big_off"
+                    app:tint="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/tv_like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/placeholder_stat_val"
+                    android:textColor="@color/colorTextGrey"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="6dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:contentDescription="@string/label_comments"
+                    android:src="@drawable/ic_comentarios"
+                    app:tint="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/tv_comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/placeholder_stat_val"
+                    android:textColor="@color/colorTextGrey"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
