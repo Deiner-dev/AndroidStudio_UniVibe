@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSplashBackground"
+    tools:context=".SplashActivity">
+
+    <!-- Top Glow Decoration (matches reference image style) -->
+    <ImageView
+        android:id="@+id/iv_splash_top"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
+        android:contentDescription="@string/desc_logo"
+        android:scaleType="fitStart"
+        android:src="@drawable/zonaarriba"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Bottom Glow Decoration (matches reference image style) -->
+    <ImageView
+        android:id="@+id/iv_splash_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitEnd"
+        android:src="@drawable/zonaabajo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Center Content Layout -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- App Logo from drawable/logo.png -->
+        <ImageView
+            android:id="@+id/iv_splash_logo"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/desc_logo"
+            android:elevation="8dp"
+            android:src="@drawable/logo" />
+
+        <!-- App Name Title -->
+        <TextView
+            android:id="@+id/tv_splash_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05" />
+
+        <!-- Subtitle / Tagline -->
+        <TextView
+            android:id="@+id/tv_splash_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@string/welcome_to_univibe"
+            android:textColor="@color/TurquesaVivo"
+            android:textSize="15sp" />
+
+        <!-- Loading Status Text -->
+        <TextView
+            android:id="@+id/tv_splash_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:text="@string/splash_loading_resources"
+            android:textColor="#B0C4BE"
+            android:textSize="14sp" />
+
+        <!-- Progress Bar (Barra de Carga) -->
+        <ProgressBar
+            android:id="@+id/progress_bar_loading"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginBottom="12dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/bg_button" />
+
+        <!-- Percentage Text -->
+        <TextView
+            android:id="@+id/tv_progress_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:textColor="@color/TurquesaVivo"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

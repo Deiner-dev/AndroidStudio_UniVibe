@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp"
+    android:paddingHorizontal="4dp">
+
+    <!-- Avatar / Icon -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_notif_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+    <!-- Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_notif_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextDark"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            tools:text="Valentina Rojas" />
+
+        <TextView
+            android:id="@+id/tv_notif_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/colorTextGrey"
+            android:textSize="12sp"
+            tools:text="te comenzó a seguir" />
+    </LinearLayout>
+
+    <!-- Time Ago -->
+    <TextView
+        android:id="@+id/tv_notif_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorTextGrey"
+        android:textSize="11sp"
+        tools:text="Hace 2 min" />
+
+    <!-- Unread Indicator Dot -->
+    <View
+        android:id="@+id/v_unread_dot"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/bg_notification_badge"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

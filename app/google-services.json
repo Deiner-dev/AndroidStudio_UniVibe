@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "406255415234",
+    "firebase_url": "https://univibe-f34df-default-rtdb.firebaseio.com",
+    "project_id": "univibe-f34df",
+    "storage_bucket": "univibe-f34df.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406255415234:android:5eb0d1e142fdeda4ac705b",
+        "android_client_info": {
+          "package_name": "com.gamevault.univibe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406255415234-llkits95is0vbsvistp7hd923s3bk27e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamevault.univibe",
+            "certificate_hash": "56dfb03c90176aa99929b46604c712fbf2b2458c"
+          }
+        },
+        {
+          "client_id": "406255415234-nok67o4ecauklaer73vhlbj0pd4ohp00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPCs47L_ekysq5-fn1vQ2kInBgHnB7Hd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406255415234-nok67o4ecauklaer73vhlbj0pd4ohp00.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
