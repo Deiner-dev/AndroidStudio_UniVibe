@@ -546,7 +546,10 @@ public class PefilUser extends AppCompatActivity {
         
         View navSearch = findViewById(R.id.ll_nav_buscar);
         if (navSearch != null) {
-            navSearch.setOnClickListener(v -> Toast.makeText(this, R.string.nav_search, Toast.LENGTH_SHORT).show());
+            navSearch.setOnClickListener(v -> {
+                Intent intent = new Intent(this, Buscador.class);
+                startActivity(intent);
+            });
         }
         
         View navAdd = findViewById(R.id.fl_nav_center);

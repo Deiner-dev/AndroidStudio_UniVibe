@@ -12,6 +12,8 @@ public class Publicacion {
     private String semester;
     private String textContent;
     private String imageUrl;
+    private String videoUrl;
+    private String mediaType;
     private String location;
     private long timestamp;
     private int commentsCount;
@@ -65,6 +67,12 @@ public class Publicacion {
 
     public String getImageUrl() { return imageUrl != null ? imageUrl : ""; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getVideoUrl() { return videoUrl != null ? videoUrl : ""; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
+
+    public String getMediaType() { return mediaType != null ? mediaType : ""; }
+    public void setMediaType(String mediaType) { this.mediaType = mediaType; }
 
     public String getLocation() { return location != null ? location : ""; }
     public void setLocation(String location) { this.location = location; }

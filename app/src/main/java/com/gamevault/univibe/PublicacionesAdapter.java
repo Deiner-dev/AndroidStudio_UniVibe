@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -92,23 +93,62 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
             holder.tvText.setVisibility(View.GONE);
         }
 
-        // Image content
-        if (!TextUtils.isEmpty(post.getImageUrl())) {
-            holder.ivImage.setVisibility(View.VISIBLE);
-            Glide.with(context)
-                    .load(post.getImageUrl())
-                    .centerCrop()
-                    .placeholder(android.R.drawable.ic_menu_gallery)
-                    .into(holder.ivImage);
+        // Video & Image content
+        if (!TextUtils.isEmpty(post.getVideoUrl())) {
+            if (holder.vvVideo != null) {
+                holder.vvVideo.setVisibility(View.VISIBLE);
+                holder.vvVideo.setVideoURI(Uri.parse(post.getVideoUrl()));
+                holder.vvVideo.setOnPreparedListener(mp -> {
+                    mp.setVolume(0f, 0f); // Silenciado inicialmente en el feed
+                    mp.setLooping(true);
+                    mp.start();
+                });
+            }
+            if (holder.ivImage != null) holder.ivImage.setVisibility(View.GONE);
+            if (holder.ivVideoBadge != null) holder.ivVideoBadge.setVisibility(View.VISIBLE);
 
-            holder.ivImage.setOnClickListener(v -> {
-                Intent intent = new Intent(context, VerImagenCompletaActivity.class);
-                intent.putExtra("imageUrl", post.getImageUrl());
+            View.OnClickListener openVideoListener = v -> {
+                Intent intent = new Intent(context, ReproductorVideo.class);
+                intent.putExtra("videoUrl", post.getVideoUrl());
+                intent.putExtra("postId", post.getPostId());
+                intent.putExtra("postAuthorUid", post.getUid());
+                intent.putExtra("userName", post.getUserName());
+                intent.putExtra("userPhotoUrl", post.getUserPhotoUrl());
+                intent.putExtra("caption", post.getTextContent());
+                intent.putExtra("likesCount", post.getLikesCount());
                 context.startActivity(intent);
-            });
+            };
+
+            if (holder.vvVideo != null) holder.vvVideo.setOnClickListener(openVideoListener);
+            if (holder.ivVideoBadge != null) holder.ivVideoBadge.setOnClickListener(openVideoListener);
+
+        } else if (!TextUtils.isEmpty(post.getImageUrl())) {
+            if (holder.ivImage != null) {
+                holder.ivImage.setVisibility(View.VISIBLE);
+                Glide.with(context)
+                        .load(post.getImageUrl())
+                        .centerCrop()
+                        .placeholder(android.R.drawable.ic_menu_gallery)
+                        .into(holder.ivImage);
+
+                holder.ivImage.setOnClickListener(v -> {
+                    Intent intent = new Intent(context, VerImagenCompletaActivity.class);
+                    intent.putExtra("imageUrl", post.getImageUrl());
+                    context.startActivity(intent);
+                });
+            }
+            if (holder.vvVideo != null) {
+                holder.vvVideo.setVisibility(View.GONE);
+                holder.vvVideo.stopPlayback();
+            }
+            if (holder.ivVideoBadge != null) holder.ivVideoBadge.setVisibility(View.GONE);
         } else {
-            holder.ivImage.setVisibility(View.GONE);
-            holder.ivImage.setOnClickListener(null);
+            if (holder.ivImage != null) holder.ivImage.setVisibility(View.GONE);
+            if (holder.vvVideo != null) {
+                holder.vvVideo.setVisibility(View.GONE);
+                holder.vvVideo.stopPlayback();
+            }
+            if (holder.ivVideoBadge != null) holder.ivVideoBadge.setVisibility(View.GONE);
         }
 
         // Location
@@ -321,19 +361,13 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
     }
 
     private void abrirMapa(String locationText) {
+        if (TextUtils.isEmpty(locationText)) return;
         try {
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(locationText));
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
-            if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
-                context.startActivity(mapIntent);
-            } else {
-                Uri webUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" + Uri.encode(locationText));
-                Intent webIntent = new Intent(Intent.ACTION_VIEW, webUri);
-                context.startActivity(webIntent);
-            }
+            Intent intent = new Intent(context, VerMapaActivity.class);
+            intent.putExtra("locationText", locationText);
+            context.startActivity(intent);
         } catch (Exception e) {
-            Toast.makeText(context, "No se pudo abrir el mapa", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No se pudo abrir la ubicación", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -344,7 +378,8 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
 
     public static class PublicacionViewHolder extends RecyclerView.ViewHolder {
         ShapeableImageView ivUserAvatar, ivImage;
-        ImageView ivLikeStar;
+        VideoView vvVideo;
+        ImageView ivLikeStar, ivVideoBadge;
         MaterialButton btnFollowUser;
         TextView tvUserName, tvAcademicInfo, tvTime, tvText, tvLocationText, tvCommentCount, tvLikeCount;
         LinearLayout llLocation, llComment, llLike;
@@ -353,7 +388,9 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
             super(itemView);
             ivUserAvatar = itemView.findViewById(R.id.iv_post_user_avatar);
             ivImage = itemView.findViewById(R.id.iv_post_image);
+            vvVideo = itemView.findViewById(R.id.vv_post_video);
             ivLikeStar = itemView.findViewById(R.id.iv_like_star);
+            ivVideoBadge = itemView.findViewById(R.id.iv_post_video_badge);
             btnFollowUser = itemView.findViewById(R.id.btn_follow_user);
             tvUserName = itemView.findViewById(R.id.tv_post_user_name);
             tvAcademicInfo = itemView.findViewById(R.id.tv_post_academic_info);

@@ -60,7 +60,7 @@ public class panelPrincipal extends AppCompatActivity {
     private List<Publicacion> publicacionesList;
     private PublicacionesAdapter publicacionesAdapter;
 
-    private Uri cameraImageUri = null;
+    private Uri cameraVideoUri = null;
 
     private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -78,11 +78,11 @@ public class panelPrincipal extends AppCompatActivity {
                 }
             });
 
-    private final ActivityResultLauncher<Uri> takePictureLauncher =
-            registerForActivityResult(new ActivityResultContracts.TakePicture(), isSuccess -> {
-                if (isSuccess && cameraImageUri != null) {
-                    Intent intent = new Intent(this, RecortarImagenActivity.class);
-                    intent.putExtra("imageUri", cameraImageUri.toString());
+    private final ActivityResultLauncher<Uri> captureVideoLauncher =
+            registerForActivityResult(new ActivityResultContracts.CaptureVideo(), isSuccess -> {
+                if (isSuccess && cameraVideoUri != null) {
+                    Intent intent = new Intent(this, PublicacionContenido.class);
+                    intent.putExtra("capturedVideoUri", cameraVideoUri.toString());
                     startActivity(intent);
                 }
             });
@@ -114,6 +114,7 @@ public class panelPrincipal extends AppCompatActivity {
         loadUserInfo();
         loadPublicaciones();
         solicitarPermisoNotificaciones();
+        escucharLlamadasEntrantes();
     }
 
     private void solicitarPermisoNotificaciones() {
@@ -333,7 +334,12 @@ public class panelPrincipal extends AppCompatActivity {
         if (navInicio != null) navInicio.setOnClickListener(v -> Toast.makeText(this, R.string.nav_home, Toast.LENGTH_SHORT).show());
         
         View navBuscar = findViewById(R.id.ll_nav_buscar);
-        if (navBuscar != null) navBuscar.setOnClickListener(v -> Toast.makeText(this, R.string.nav_search, Toast.LENGTH_SHORT).show());
+        if (navBuscar != null) {
+            navBuscar.setOnClickListener(v -> {
+                Intent intent = new Intent(this, Buscador.class);
+                startActivity(intent);
+            });
+        }
         
         View navAdd = findViewById(R.id.fl_nav_center);
         if (navAdd != null) {
@@ -502,9 +508,9 @@ public class panelPrincipal extends AppCompatActivity {
 
     private void abrirCamaraCaptura() {
         try {
-            File photoFile = File.createTempFile("cam_photo_", ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
-            cameraImageUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", photoFile);
-            takePictureLauncher.launch(cameraImageUri);
+            File videoFile = File.createTempFile("cam_video_", ".mp4", getExternalFilesDir(Environment.DIRECTORY_MOVIES));
+            cameraVideoUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", videoFile);
+            captureVideoLauncher.launch(cameraVideoUri);
         } catch (Exception e) {
             Toast.makeText(this, "Error al abrir la cámara", Toast.LENGTH_SHORT).show();
         }
@@ -520,6 +526,48 @@ public class panelPrincipal extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         EstadoUsuarioHelper.setOnline(false);
+    }
+
+    private DatabaseReference incomingCallRef;
+    private ValueEventListener incomingCallListener;
+    private boolean isIncomingCallShowing = false;
+
+    private void escucharLlamadasEntrantes() {
+        if (TextUtils.isEmpty(currentUserId)) return;
+        incomingCallRef = FirebaseDatabase.getInstance().getReference("llamadas").child(currentUserId);
+        incomingCallListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (isFinishing() || isDestroyed()) return;
+                if (snapshot.exists()) {
+                    String status = snapshot.child("status").getValue(String.class);
+                    String callerUid = snapshot.child("callerUid").getValue(String.class);
+                    String callerName = snapshot.child("callerName").getValue(String.class);
+                    String callerPhoto = snapshot.child("callerPhoto").getValue(String.class);
+                    String callType = snapshot.child("callType").getValue(String.class);
+
+                    if ("RINGING".equals(status) && !TextUtils.isEmpty(callerUid) && !callerUid.equals(currentUserId)) {
+                        if (!isIncomingCallShowing) {
+                            isIncomingCallShowing = true;
+                            Intent intent = new Intent(panelPrincipal.this, LlamadaEntranteActivity.class);
+                            intent.putExtra("callerUid", callerUid);
+                            intent.putExtra("callerName", callerName);
+                            intent.putExtra("callerPhoto", callerPhoto);
+                            intent.putExtra("callType", callType);
+                            startActivity(intent);
+                        }
+                    } else if (snapshot.child("status").getValue() == null) {
+                        isIncomingCallShowing = false;
+                    }
+                } else {
+                    isIncomingCallShowing = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        };
+        incomingCallRef.addValueEventListener(incomingCallListener);
     }
 
     @Override

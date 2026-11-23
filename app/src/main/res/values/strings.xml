@@ -171,4 +171,18 @@
     <string name="splash_loading_resources">Cargando recursos...</string>
     <string name="splash_checking_session">Verificando sesión...</string>
     <string name="splash_loaded_success">¡Todo listo!</string>
+
+    <!-- Search Screen Strings -->
+    <string name="hint_search_placeholder">Buscar amigos, usuarios o universidades...</string>
+    <string name="chip_personas">Personas</string>
+    <string name="chip_universidades">Universidades</string>
+    <string name="chip_sugeridos">Sugeridos</string>
+    <string name="empty_search_title">¿No encuentras a alguien?</string>
+    <string name="empty_search_subtitle">Intenta con otro nombre o revisa tus sugerencias.</string>
+    <string name="initial_search_title">Aún no has buscado a nadie</string>
+    <string name="initial_search_subtitle">Escribe un nombre o apellido para encontrar a tus amigos en UniVibe.</string>
+
+    <!-- Chat de llamadas -->
+    <string name="title_chat">Llamada</string>"
+
 </resources>

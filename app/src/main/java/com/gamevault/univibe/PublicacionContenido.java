@@ -56,7 +56,7 @@ public class PublicacionContenido extends AppCompatActivity {
     private ProgressBar pbPublishing;
 
     private DatabaseReference userRef, postsRef;
-    private StorageReference storagePostsRef;
+    private StorageReference storagePostsRef, storageVideosRef;
     private ValueEventListener userValueEventListener;
 
     private String currentUserId;
@@ -67,13 +67,24 @@ public class PublicacionContenido extends AppCompatActivity {
     private String semester = "";
 
     private Uri selectedImageUri = null;
+    private Uri selectedVideoUri = null;
     private Button btnLocation;
 
     private final ActivityResultLauncher<String> pickImageLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
                     selectedImageUri = uri;
+                    selectedVideoUri = null;
                     mostrarVistaPreviaImagen();
+                }
+            });
+
+    private final ActivityResultLauncher<String> pickVideoLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    selectedVideoUri = uri;
+                    selectedImageUri = null;
+                    mostrarVistaPreviaVideo();
                 }
             });
 
@@ -111,6 +122,12 @@ public class PublicacionContenido extends AppCompatActivity {
             mostrarVistaPreviaImagen();
         }
 
+        String capturedVideoUriString = getIntent().getStringExtra("capturedVideoUri");
+        if (!TextUtils.isEmpty(capturedVideoUriString)) {
+            selectedVideoUri = Uri.parse(capturedVideoUriString);
+            mostrarVistaPreviaVideo();
+        }
+
     }
 
     private void initViews() {
@@ -134,6 +151,7 @@ public class PublicacionContenido extends AppCompatActivity {
         userRef = FirebaseDatabase.getInstance().getReference("registroUsuario").child(currentUserId);
         postsRef = FirebaseDatabase.getInstance().getReference("publicaciones");
         storagePostsRef = FirebaseStorage.getInstance().getReference("publicaciones").child(currentUserId);
+        storageVideosRef = FirebaseStorage.getInstance().getReference("videos").child(currentUserId);
     }
 
     private void cargarDatosUsuario() {
@@ -177,9 +195,7 @@ public class PublicacionContenido extends AppCompatActivity {
     private void setupListeners() {
         llOptionImage.setOnClickListener(v -> pickImageLauncher.launch("image/*"));
 
-        llOptionVideo.setOnClickListener(v -> 
-            Toast.makeText(this, R.string.msg_videos_not_supported, Toast.LENGTH_SHORT).show()
-        );
+        llOptionVideo.setOnClickListener(v -> pickVideoLauncher.launch("video/*"));
 
         ibRemoveImage.setOnClickListener(v -> quitarImagen());
 
@@ -216,8 +232,20 @@ public class PublicacionContenido extends AppCompatActivity {
         }
     }
 
+    private void mostrarVistaPreviaVideo() {
+        if (selectedVideoUri != null && flImagePreview != null && ivImagePreview != null) {
+            flImagePreview.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .load(selectedVideoUri)
+                    .centerCrop()
+                    .placeholder(android.R.drawable.ic_media_play)
+                    .into(ivImagePreview);
+        }
+    }
+
     private void quitarImagen() {
         selectedImageUri = null;
+        selectedVideoUri = null;
         if (flImagePreview != null) {
             flImagePreview.setVisibility(View.GONE);
         }
@@ -229,9 +257,10 @@ public class PublicacionContenido extends AppCompatActivity {
 
         boolean tieneTexto = !TextUtils.isEmpty(texto);
         boolean tieneImagen = (selectedImageUri != null);
+        boolean tieneVideo = (selectedVideoUri != null);
 
-        if (!tieneTexto && !tieneImagen) {
-            Toast.makeText(this, R.string.msg_post_empty_error, Toast.LENGTH_SHORT).show();
+        if (!tieneTexto && !tieneImagen && !tieneVideo) {
+            Toast.makeText(this, "Ingresa un texto, imagen o video para publicar", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -245,11 +274,66 @@ public class PublicacionContenido extends AppCompatActivity {
             return;
         }
 
-        if (tieneImagen) {
+        if (tieneVideo) {
+            subirVideoYGuardarPublicacion(postId, texto, ubicacion);
+        } else if (tieneImagen) {
             subirImagenYGuardarPublicacion(postId, texto, ubicacion);
         } else {
             guardarPublicacionEnDatabase(postId, texto, "", ubicacion);
         }
+    }
+
+    private void subirVideoYGuardarPublicacion(String postId, String texto, String ubicacion) {
+        StorageReference videoFileRef = storageVideosRef.child(postId + ".mp4");
+
+        videoFileRef.putFile(selectedVideoUri).addOnSuccessListener(taskSnapshot -> 
+            videoFileRef.getDownloadUrl().addOnSuccessListener(downloadUri -> {
+                String videoUrl = downloadUri.toString();
+                guardarPublicacionConVideoEnDatabase(postId, texto, videoUrl, ubicacion);
+            }).addOnFailureListener(this::manejarErrorPublicacion)
+        ).addOnFailureListener(this::manejarErrorPublicacion);
+    }
+
+    private void guardarPublicacionConVideoEnDatabase(String postId, String texto, String videoUrl, String ubicacion) {
+        long timestamp = System.currentTimeMillis();
+
+        String carreraFinal = (career != null) ? career : "";
+        String semestreFinal = (semester != null) ? semester : "";
+        String universidadFinal = (university != null) ? university : "";
+        String nombreFinal = (userName != null) ? userName : "";
+        String fotoFinal = (userPhotoUrl != null) ? userPhotoUrl : "";
+
+        Publicacion publicacion = new Publicacion(
+                postId,
+                currentUserId,
+                nombreFinal,
+                fotoFinal,
+                universidadFinal,
+                carreraFinal,
+                semestreFinal,
+                texto,
+                "",
+                ubicacion,
+                timestamp
+        );
+        publicacion.setVideoUrl(videoUrl);
+        publicacion.setMediaType("VIDEO");
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/publicaciones/" + postId, publicacion);
+        childUpdates.put("/userPublicaciones/" + currentUserId + "/" + postId, publicacion);
+
+        rootRef.updateChildren(childUpdates).addOnCompleteListener(task -> {
+            setBotonEstadoCarga(false);
+            if (task.isSuccessful()) {
+                Toast.makeText(PublicacionContenido.this, "¡Video publicado con éxito!", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                String errorMsg = (task.getException() != null) ? task.getException().getMessage() : getString(R.string.msg_post_error);
+                Toast.makeText(PublicacionContenido.this, errorMsg, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void subirImagenYGuardarPublicacion(String postId, String texto, String ubicacion) {

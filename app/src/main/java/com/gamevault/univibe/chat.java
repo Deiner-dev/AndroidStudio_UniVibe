@@ -163,11 +163,23 @@ public class chat extends AppCompatActivity {
         }
 
         if (ibCall != null) {
-            ibCall.setOnClickListener(v -> Toast.makeText(this, "Llamadas no disponibles por ahora", Toast.LENGTH_SHORT).show());
+            ibCall.setOnClickListener(v -> {
+                Intent intent = new Intent(chat.this, LlamadaVoz.class);
+                intent.putExtra("targetUid", targetUserId);
+                intent.putExtra("targetUserName", targetUserName);
+                intent.putExtra("targetPhotoUrl", targetPhotoUrl);
+                startActivity(intent);
+            });
         }
 
         if (ibVideo != null) {
-            ibVideo.setOnClickListener(v -> Toast.makeText(this, "🎥 Videollamadas no disponibles por ahora", Toast.LENGTH_SHORT).show());
+            ibVideo.setOnClickListener(v -> {
+                Intent intent = new Intent(chat.this, llamadaVideo.class);
+                intent.putExtra("targetUid", targetUserId);
+                intent.putExtra("targetUserName", targetUserName);
+                intent.putExtra("targetPhotoUrl", targetPhotoUrl);
+                startActivity(intent);
+            });
         }
     }
 

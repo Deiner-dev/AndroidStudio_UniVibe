@@ -113,17 +113,44 @@
                 tools:text="¡Hola a todos! Compartiendo una nueva publicación en UniVibe."
                 tools:visibility="visible" />
 
-            <!-- Post Image Content -->
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iv_post_image"
+            <!-- Post Media Container (Image or Video) -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                tools:src="@android:drawable/ic_menu_gallery"
-                tools:visibility="visible" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_post_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                    tools:src="@android:drawable/ic_menu_gallery"
+                    tools:visibility="visible" />
+
+                <!-- Video Autoplay View (Muted) -->
+                <VideoView
+                    android:id="@+id/vv_post_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <!-- Video Indicator Badge -->
+                <ImageView
+                    android:id="@+id/iv_post_video_badge"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_circle_play_button"
+                    android:contentDescription="@string/app_name"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_media_play"
+                    android:visibility="gone"
+                    app:tint="@color/white"
+                    tools:visibility="visible" />
+            </FrameLayout>
 
             <!-- Location Tag -->
             <LinearLayout

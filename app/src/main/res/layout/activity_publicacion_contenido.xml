@@ -160,6 +160,16 @@
                             android:scaleType="centerCrop"
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
+                        <ImageView
+                            android:id="@+id/iv_video_play_badge"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/app_name"
+                            android:src="@android:drawable/ic_media_play"
+                            android:visibility="gone"
+                            app:tint="@color/white" />
+
                         <ImageButton
                             android:id="@+id/ib_remove_image"
                             android:layout_width="32dp"

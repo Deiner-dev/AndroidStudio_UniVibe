@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSplashBackground"
+    tools:context=".LlamadaVoz">
+
+    <!-- Top Glow Decoration -->
+    <ImageView
+        android:layout_width="260dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitStart"
+        android:src="@drawable/zonaarriba"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Bottom Glow Decoration -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitEnd"
+        android:src="@drawable/zonaabajo"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Top Navigation Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_call_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ib_back_call"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_circle_play_button"
+            android:contentDescription="@string/desc_back"
+            android:src="@drawable/ic_fecha_atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/ib_add_participant"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_circle_play_button"
+            android:contentDescription="@string/app_name"
+            android:src="@android:drawable/ic_menu_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Call Status Info -->
+    <LinearLayout
+        android:id="@+id/ll_call_status_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_call_top_bar">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <View android:layout_width="3dp" android:layout_height="10dp" android:layout_marginHorizontal="2dp" android:background="@color/TurquesaVivo" />
+            <View android:layout_width="3dp" android:layout_height="16dp" android:layout_marginHorizontal="2dp" android:background="@color/TurquesaVivo" />
+            <View android:layout_width="3dp" android:layout_height="20dp" android:layout_marginHorizontal="2dp" android:background="@color/TurquesaVivo" />
+            <View android:layout_width="3dp" android:layout_height="14dp" android:layout_marginHorizontal="2dp" android:background="@color/TurquesaVivo" />
+            <View android:layout_width="3dp" android:layout_height="8dp" android:layout_marginHorizontal="2dp" android:background="@color/TurquesaVivo" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Llamada por voz"
+            android:textColor="@color/TurquesaVivo"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Caller Circular Avatar with Glowing Ring -->
+    <FrameLayout
+        android:id="@+id/fl_avatar_container"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_call_status_header">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_achievement_circle" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_caller_avatar"
+            android:layout_width="156dp"
+            android:layout_height="156dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+        <FrameLayout
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_fab_green">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_menu_call"
+                app:tint="@color/white" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <!-- Caller Name and Timer -->
+    <TextView
+        android:id="@+id/tv_caller_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Carlos Rojas"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fl_avatar_container" />
+
+    <TextView
+        android:id="@+id/tv_call_timer_voice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="00:12"
+        android:textColor="#A0B0A8"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_caller_name" />
+
+    <!-- Audio Waveform Visualizer Simulation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/ll_voice_controls"
+        app:layout_constraintTop_toBottomOf="@id/tv_call_timer_voice">
+
+        <View android:layout_width="3dp" android:layout_height="16dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" android:alpha="0.5"/>
+        <View android:layout_width="3dp" android:layout_height="24dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" android:alpha="0.7"/>
+        <View android:layout_width="3dp" android:layout_height="36dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="52dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="30dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="44dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="60dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="38dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="22dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="48dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="58dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="32dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="40dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" />
+        <View android:layout_width="3dp" android:layout_height="20dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" android:alpha="0.7"/>
+        <View android:layout_width="3dp" android:layout_height="12dp" android:layout_marginHorizontal="3dp" android:background="@color/TurquesaVivo" android:alpha="0.5"/>
+    </LinearLayout>
+
+    <!-- Bottom Controls (4 Buttons: Mute, Speaker, End, Switch to Video) -->
+    <LinearLayout
+        android:id="@+id/ll_voice_controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Mute Button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_voice_mute"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_circle_play_button"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_lock_silent_mode_off"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Silenciar"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Speaker Button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_voice_speaker"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_circle_play_button"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_btn_speak_now"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Altavoz"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- End Call Button (Red) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_voice_end"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_notification_badge"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Finalizar"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Switch to Video Button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_voice_switch_video"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_circle_play_button"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_menu_camera"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Cambiar a video"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
